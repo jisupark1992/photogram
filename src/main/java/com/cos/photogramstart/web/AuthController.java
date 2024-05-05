@@ -45,8 +45,11 @@ public class AuthController {
 			
 			for(FieldError error:bindingResult.getFieldErrors()) {
 				errorMap.put(error.getField(), error.getDefaultMessage());
-				System.out.println(error.getDefaultMessage());
 			}
+			
+			throw new RuntimeException("유효성검사 실패함");
+		} else { 
+			
 		}
 		
 		User user = signupDto.toEntity();
