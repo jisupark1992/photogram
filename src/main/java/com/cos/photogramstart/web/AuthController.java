@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.cos.photogramstart.handler.ex.CustomValidationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -47,13 +48,13 @@ public class AuthController {
 				errorMap.put(error.getField(), error.getDefaultMessage());
 			}
 			
-			throw new RuntimeException("유효성검사 실패함");
-		} else { 
-			
+			throw new CustomValidationException("유효성검사 실패함", errorMap);
+		} else {
+			User user = signupDto.toEntity();
+			User userEntity = authService.회원가입(user);
+			System.out.println(userEntity);
+
+			return "auth/signin";
 		}
-		
-		User user = signupDto.toEntity();
-		User userEntity = authService.회원가입(user);
-		return "auth/signin";
 	}
 }
