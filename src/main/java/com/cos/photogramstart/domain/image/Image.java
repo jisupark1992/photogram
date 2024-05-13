@@ -1,6 +1,7 @@
 package com.cos.photogramstart.domain.image;
 
 import com.cos.photogramstart.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +23,9 @@ public class Image { // N, 1
     private String caption;
     private String postImageUrl;
 
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name = "userId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user; // 1, 1
 
     private LocalDateTime createDate;

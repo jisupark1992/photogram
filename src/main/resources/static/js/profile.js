@@ -66,9 +66,9 @@ function getSubscribeModalItem(u) {
 	item += `<div class="subscribe__btn">`;
 	if (!u.equalUserState) {
 		if (u.subscribeState) {
-			item += `<button class="cta blue" onclick="toggleSubscribeModal(${u.userId}, this)">구독취소</button>`;
+			item += `<button class="cta blue" onclick="toggleSubscribe(${u.userId}, this)">구독취소</button>`;
 		} else {
-			item += `<button class="cta" onclick="toggleSubscribeModal(${u.userId}, this)">구독하기</button>`;
+			item += `<button class="cta" onclick="toggleSubscribe(${u.userId}, this)">구독하기</button>`;
 		}
 	}
 	item += `</div>`;
