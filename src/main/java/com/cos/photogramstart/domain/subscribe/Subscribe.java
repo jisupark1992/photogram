@@ -17,23 +17,24 @@ import java.time.LocalDateTime;
 @Data
 @Entity // 디비에 테이블을 생성
 @Table(
-	uniqueConstraints = {
-			@UniqueConstraint(
-					name="subscribe_uk",
-					columnNames = {"fromUserId", "toUserId"}
-			)
-	}
+		name="subscribe",
+		uniqueConstraints={
+				@UniqueConstraint(
+						name = "subscribe_uk",
+						columnNames={"fromUserId","toUserId"}
+				)
+		}
 )
 public class Subscribe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략이 데이터베이스를 따라간다.
 	private int id;
 
-	@JoinColumn(name = "fromUser")
+	@JoinColumn(name = "fromUserId")
 	@ManyToOne
 	private User fromUser;
 
-	@JoinColumn(name = "toUser")
+	@JoinColumn(name = "toUserId")
 	@ManyToOne
 	private User toUser;
 
