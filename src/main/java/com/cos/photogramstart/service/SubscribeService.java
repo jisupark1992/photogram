@@ -4,6 +4,7 @@ import com.cos.photogramstart.domain.subscribe.Subscribe;
 import com.cos.photogramstart.domain.subscribe.SubscribeRepository;
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +19,11 @@ public class SubscribeService {
 
     @Transactional
     public void 구독하기(int fromUserId, int toUserId) {
-        subscribeRepository.mSubscribe(fromUserId, toUserId);
+        try{
+            subscribeRepository.mSubscribe(fromUserId, toUserId);
+        }catch (Exception e){
+            throw new CustomApiException("이미 구독을 하였습니다.");
+        }
     }
 
     @Transactional
