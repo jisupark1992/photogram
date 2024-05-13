@@ -1,6 +1,7 @@
 package com.cos.photogramstart.handler;
 
 import com.cos.photogramstart.handler.ex.CustomApiException;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import com.cos.photogramstart.web.dto.CMRespDto;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,12 @@ public class ControllerExceptionHandler {
 			return Script.back(e.getErrorMap().toString());
 		}
 	}
+
+	@ExceptionHandler(CustomException.class)
+	public String validationException(CustomException e) {
+		return Script.back(e.getMessage());
+	}
+
 
 	@ExceptionHandler(CustomValidationApiException.class)
 	public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
